@@ -11,6 +11,7 @@ public class ArrayItTest {
 
     @Test
     public void whenMultiCallhasNextThenTrue() {
+
         ArrayIt it = new ArrayIt(
                 new int[]{1, 2, 3}
         );

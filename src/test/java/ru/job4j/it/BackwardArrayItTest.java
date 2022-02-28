@@ -20,6 +20,7 @@ public class BackwardArrayItTest {
 
     @Test
     public void whenReadSequence() {
+
         BackwardArrayIt it = new BackwardArrayIt(
                 new int[]{1, 2, 3}
         );
