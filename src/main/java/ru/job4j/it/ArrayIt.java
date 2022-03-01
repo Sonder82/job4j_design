@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ArrayIt implements Iterator {
-
     private final int[] data;
     private int point = 0;
 
@@ -16,6 +15,7 @@ public class ArrayIt implements Iterator {
     public boolean hasNext() {
         return point < data.length;
     }
+
 
     @Override
     public Object next() {

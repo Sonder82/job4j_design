@@ -20,7 +20,6 @@ public class BackwardArrayItTest {
 
     @Test
     public void whenReadSequence() {
-
         BackwardArrayIt it = new BackwardArrayIt(
                 new int[]{1, 2, 3}
         );
@@ -28,6 +27,7 @@ public class BackwardArrayItTest {
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(1));
     }
+
 
     @Test(expected = NoSuchElementException.class)
     public void whenNextFromEmpty() {
