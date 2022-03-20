@@ -49,7 +49,10 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     private void upSize() {
-        container = Arrays.copyOf(container, size * 2);
+        if (container.length == 0) {
+            container =  (T[]) new Object[10];
+        }
+        container = Arrays.copyOf(container, container.length * 2);
     }
 
     /**
@@ -61,7 +64,6 @@ public class SimpleArrayList<T> implements List<T> {
      */
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, size);
         T oldValue = get(index);
         container[index] = newValue;
         return oldValue;
@@ -97,7 +99,7 @@ public class SimpleArrayList<T> implements List<T> {
      */
     @Override
     public T get(int index) {
-        Objects.checkIndex(index, container.length);
+        Objects.checkIndex(index, size);
         return container[index];
     }
 
