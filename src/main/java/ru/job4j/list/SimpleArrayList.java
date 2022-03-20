@@ -42,25 +42,26 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public void add(T value) {
         if (size == container.length) {
-            container = Arrays.copyOf(container, container.length * 2);
+            upSize();
         }
         container[size++] = value;
         modCount++;
     }
 
+    private void upSize() {
+        container = Arrays.copyOf(container, size * 2);
+    }
+
     /**
      * Изменение значения в массиве.
      * Метод принимает значение индекса и новое значение элемента.
-     * В методах, где используется индекс нужно делать валидацию.
-     * Индекс должен находиться в рамках добавленных элементов.
-     * Для проверки индекса используем метод Objects.checkIndex().
      * @param index индекс элемента.
      * @param newValue новое значение элемента.
      * @return возвращает старое значение элемента.
      */
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, container.length);
+        Objects.checkIndex(index, size);
         T oldValue = get(index);
         container[index] = newValue;
         return oldValue;
@@ -69,7 +70,6 @@ public class SimpleArrayList<T> implements List<T> {
     /**
      * Удаление элемента.
      * Метод принимает значение индекса.
-     * Для проверки индекса используем метод Objects.checkIndex().
      * Для удаления нужно использовать метод System.arraycopy().
      * При удаления элемента мы сдвигаем элементы массива влево(ориентир точки сдвига по index).
      * На последнее место ставим null, чтобы не было утечки памяти (если удаляем последний элемент).
@@ -78,7 +78,6 @@ public class SimpleArrayList<T> implements List<T> {
      */
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, container.length);
         modCount++;
         T deleteValue = get(index);
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
@@ -90,6 +89,8 @@ public class SimpleArrayList<T> implements List<T> {
     /**
      * Получение элемента.
      * Метод принимает значение индекса.
+     * В методах, где используется индекс нужно делать валидацию.
+     * Индекс должен находиться в рамках добавленных элементов.
      * Для проверки индекса используем метод Objects.checkIndex().
      * @param index значение индекса.
      * @return возвращает значение элемента по индексу.
