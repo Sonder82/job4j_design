@@ -103,7 +103,7 @@ public class SimpleLinkedListTest {
 
     @Test(expected = NoSuchElementException.class)
     public void whenGetIteratorFromEmptyListThenNextThrowException() {
-        List<Integer>list = new SimpleLinkedList<>();
+        List<Integer> list = new SimpleLinkedList<>();
         list.iterator().next();
     }
 }
