@@ -34,7 +34,6 @@ public class SimpleLinkedList<E> implements List<E> {
     private int modCount;
 
 
-
     private static class Node<E> {
         /**
          * Каждый узел содержит в себе элемент, который мы добавили,а также
@@ -53,21 +52,11 @@ public class SimpleLinkedList<E> implements List<E> {
 
     /**
      * Добавление элемента в список.
-     * Метод принимает на вход элемент.
+     * Метод добавляет элемент в конец списка.
      * @param value элемент,который необходимо добавить в список.
      */
     @Override
     public void add(E value) {
-        linkLast(value);
-        size++;
-        modCount++;
-    }
-
-    /**
-     * Метод добавляет элемент в конец списка.
-     * @param value элемент,который необходимо добавить в список.
-     */
-    private void linkLast(E value) {
         final Node<E> l = last;
         final Node<E> newNode = new Node<>(l, value, null);
         last = newNode;
@@ -76,26 +65,20 @@ public class SimpleLinkedList<E> implements List<E> {
         } else {
             l.next = newNode;
         }
+        size++;
+        modCount++;
     }
 
     /**
-     * Метод осуществляет поиск элемента по индексу
+     * Поиск элемента по индексу.
+     * Метод осуществляет перебор элементов в узлах(нодах) до указанного индекса.
+     * В зависимости от расположения индекса(относительно size) поиск осуществляется с первого или последнего нода.
      * @param index индекс элемента
      * @return возвращает элемент
      */
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        return node(index).item;
-    }
-
-    /**
-     * Метод осуществляет перебор элементов в узлах(нодах) до указанного индекса.
-     * В зависимости от расположения индекса(относительно size) поиск осуществляется с первого или последнего нода.
-     * @param index индекс элемента.
-     * @return возвращает узел(ноду)  по индексу.
-     */
-    public Node<E> node(int index) {
         Node<E> rsl;
         if (index < (size >> 1)) {
             rsl = first;
@@ -108,7 +91,7 @@ public class SimpleLinkedList<E> implements List<E> {
                 rsl = rsl.prev;
             }
         }
-        return rsl;
+        return rsl.item;
     }
 
     @Override
