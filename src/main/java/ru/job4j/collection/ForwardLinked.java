@@ -29,6 +29,7 @@ public class ForwardLinked<T> implements Iterable<T> {
      * Метод реализует удаление первого элемента из односвязного списка.
      * Создаем временную ноду,куда запишем первую ноду списка.
      * Далее удалим первую ноду(запишем в head следующую ноду)
+     * В удаляемом узле обнуляем ссылку на хранимое значение и ссылку на следующий узел.
      * @return возвращает первый элемент односвязного списка.
      */
     public T deleteFirst() {
@@ -37,8 +38,10 @@ public class ForwardLinked<T> implements Iterable<T> {
         }
         Node<T> tempNode = head;
         head = head.next;
+        T value = tempNode.value;
+        tempNode.value = null;
         tempNode.next = null;
-        return tempNode.value;
+        return value;
     }
 
     @Override
