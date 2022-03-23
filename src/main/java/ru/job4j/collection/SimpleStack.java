@@ -2,6 +2,7 @@ package ru.job4j.collection;
 
 /**
  * Класс описывает работу методов с контейнером Stack
+ *
  * @param <T>
  */
 public class SimpleStack<T> {
@@ -10,17 +11,17 @@ public class SimpleStack<T> {
 
     /**
      * Метод возвращает значение и удаляет его из коллекции.
+     *
      * @return возвращает значение.
      */
     public T pop() {
-        while (!linked.isEmpty()) {
-             return linked.deleteFirst();
-        }
-        return null;
+        return linked.deleteFirst();
     }
+
 
     /**
      * Метод принимает значение и возвращает его в коллекцию.
+     *
      * @param value значение
      */
     public void push(T value) {
