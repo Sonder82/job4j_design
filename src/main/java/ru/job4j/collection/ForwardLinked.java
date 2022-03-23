@@ -26,6 +26,14 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     /**
+     * Метод реализует добавление первого элемента.
+     * @param value добавляемый элемент.
+     */
+    public void addFirst(T value) {
+        head = new Node<T>(value, head);
+    }
+
+    /**
      * Метод реализует удаление первого элемента из односвязного списка.
      * Создаем временную ноду,куда запишем первую ноду списка.
      * Далее удалим первую ноду(запишем в head следующую ноду)
@@ -42,6 +50,14 @@ public class ForwardLinked<T> implements Iterable<T> {
         tempNode.value = null;
         tempNode.next = null;
         return value;
+    }
+
+    /**
+     * Метод проверяет на null первый эузел.
+     * @return возвращает true если первый узел null.
+     */
+    public boolean isEmpty() {
+        return (head == null);
     }
 
     @Override
