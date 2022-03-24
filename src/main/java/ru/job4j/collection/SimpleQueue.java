@@ -1,5 +1,7 @@
 package ru.job4j.collection;
 
+import java.util.NoSuchElementException;
+
 /**
  * Класс описывает работу используя очередь Queue.
  * Применяем "очередь на двух стеках"
@@ -16,6 +18,9 @@ public class SimpleQueue<T> {
      * @return возвращаем, что положили первым
      */
     public T poll() {
+        if (in.isEmpty()) {
+            throw new NoSuchElementException();
+        }
         if (out.isEmpty()) {
             while (!in.isEmpty()) {
                 out.push(in.pop());
