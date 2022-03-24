@@ -18,7 +18,7 @@ public class SimpleQueue<T> {
      * @return возвращаем, что положили первым
      */
     public T poll() {
-        if (in.isEmpty()) {
+        if (in.isEmpty() && out.isEmpty()) {
             throw new NoSuchElementException();
         }
         if (out.isEmpty()) {
