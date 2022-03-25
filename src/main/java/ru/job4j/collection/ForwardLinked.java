@@ -62,11 +62,9 @@ public class ForwardLinked<T> implements Iterable<T> {
      * @return возвращает true после того как список перевернут.
      */
     public boolean revert() {
-        boolean result;
+        boolean result = (head != null && head.next != null);
 
-        if (head == null || head.next == null) {
-            result = false;
-        } else {
+        if (result) {
         Node<T> previous = null;
         Node<T> current = head;
         while (current != null) {
@@ -76,7 +74,6 @@ public class ForwardLinked<T> implements Iterable<T> {
             current = next;
         }
         head = previous;
-        result = true;
     }
     return result;
 }
