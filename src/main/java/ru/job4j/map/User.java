@@ -37,7 +37,7 @@ public class User {
         User firstUser = new User("Aleksey", 2, new GregorianCalendar(1982, 2, 28));
         User secondUser = new User("Aleksey", 2, new GregorianCalendar(1982, 2, 28));
 
-        Map<User, Object> container = new HashMap<>();
+        HashMap<User, Object> container = new HashMap<>();
         container.put(firstUser, new Object());
         container.put(secondUser, new Object());
 
