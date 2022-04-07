@@ -48,11 +48,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean put(K key, V value) {
-        int index = indexFor(hash(key.hashCode()));
-        boolean add = table[index] == null;
         if (count > capacity * LOAD_FACTOR) {
             expand();
         }
+        int index = indexFor(hash(key.hashCode()));
+        boolean add = table[index] == null;
         if (add) {
             table[index] = new MapEntry<>(key, value);
             modCount++;
