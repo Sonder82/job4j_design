@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class SimpleMapTest {
 
     @Test
-    public void WhenPutAndGet() {
+    public void whenPutAndGet() {
         Map<Integer, String> map = new SimpleMap<>();
         map.put(1, "first");
         map.put(2, "second");
@@ -23,7 +23,7 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void WhenPutAndGetNull() {
+    public void whenPutAndGetNull() {
         Map<Integer, String> map = new SimpleMap<>();
         map.put(1, "first");
         map.put(2, "second");
@@ -32,7 +32,7 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void WhenRemoveByKey() {
+    public void whenRemoveByKey() {
         Map<Integer, String> map = new SimpleMap<>();
         map.put(1, "first");
         map.put(2, "second");
@@ -41,7 +41,7 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void WhenPutWithTheSameKey() {
+    public void whenPutWithTheSameKey() {
         Map<Integer, String> map = new SimpleMap<>();
         assertTrue(map.put(1, "first"));
         assertFalse(map.put(1, "second"));
