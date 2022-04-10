@@ -50,11 +50,9 @@ public class SimpleTreeTest {
 
     @Test
     public void whenAddThenGetTrueOrFalse() {
-        Tree<Integer> tree = new SimpleTree<>(1); {
+        Tree<Integer> tree = new SimpleTree<>(1);
             assertTrue(tree.add(1, 2));
-            assertTrue(tree.add(2,3));
-
-        }
+            assertTrue(tree.add(2, 3));
     }
 
     @Test
