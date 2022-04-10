@@ -9,6 +9,8 @@ public interface Tree<E> {
 
     Optional<Node<E>> findBy(E value);
 
+    boolean isBinary();
+
     /**
      * Класс описывает узел дерева. В узле хранится значение и ссылки на дочерние узлы.
      * @param <E>
