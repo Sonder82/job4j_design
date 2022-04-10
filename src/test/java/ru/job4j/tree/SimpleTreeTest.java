@@ -57,8 +57,7 @@ public class SimpleTreeTest {
 
     @Test
     public void whenAddThenGetFalse() {
-        Tree<Integer> tree = new SimpleTree<>(1); {
+        Tree<Integer> tree = new SimpleTree<>(1);
             assertFalse(tree.add(3, 1));
-        }
     }
 }
