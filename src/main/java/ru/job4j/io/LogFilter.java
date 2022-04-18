@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -21,7 +20,10 @@ public class LogFilter {
         List<String> list = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(filter))) {
             list = in.lines()
-                    .filter(x -> Objects.equals(x.split(" ")[x.split(" ").length - 2], "404"))
+                    .filter(x -> {
+                        String[] words = x.split(" ");
+                        return words[words.length - 2].equals("404");
+                    })
                     .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
