@@ -26,10 +26,34 @@ public class ConfigTest {
         assertThat(config.value("surName"), is("Novoselov"));
     }
 
-    @Test(expected =  IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void whenWrongWritePair() {
         String path = "./data/pair_illegal_argument.properties";
         Config config = new Config(path);
         config.load();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPairWithoutEquals() {
+        String path = "./data/pair_not_contains_equals.properties";
+        Config config = new Config(path);
+        config.load();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPairWithoutKey() {
+        String path = "./data/pair_without_key.properties";
+        Config config = new Config(path);
+        config.load();
+    }
+
+    @Test
+    public void whenPairWithComments() {
+        String path = "./data/pair_with_multiEquals.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("name"), is("Aleksey=surName=Novoselov"));
+        assertThat(config.value("surName"), is("Novoselov=name=Aleksey"));
+        assertThat(config.value("age"), is(Matchers.nullValue()));
     }
 }

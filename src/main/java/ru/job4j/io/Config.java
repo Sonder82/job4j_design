@@ -23,9 +23,24 @@ public class Config {
                         if (s.startsWith("=") || s.endsWith("=")) {
                             throw new IllegalArgumentException();
                         }
+                        if (!s.contains("=")) {
+                            throw new IllegalArgumentException();
+                        }
                             String[] stringMap = s.split("=");
                             if (stringMap.length == 2) {
                             values.put(stringMap[0], stringMap[1]);
+                        }
+                        if (stringMap[0].equals("")) {
+                            throw new IllegalArgumentException();
+                        }
+                        if (stringMap.length > 2) {
+                            StringJoiner joiner = new StringJoiner("=");
+                            for (int index = 1; index < stringMap.length; index++) {
+                                joiner.add(stringMap[index]);
+                                stringMap[1] = joiner.toString();
+                                values.put(stringMap[0], stringMap[1]);
+                            }
+
                         }
                     });
         } catch (IOException e) {
