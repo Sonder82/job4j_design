@@ -48,7 +48,7 @@ public class ConfigTest {
     }
 
     @Test
-    public void whenPairWithComments() {
+    public void whenPairWithMultiEquals() {
         String path = "./data/pair_with_multiEquals.properties";
         Config config = new Config(path);
         config.load();

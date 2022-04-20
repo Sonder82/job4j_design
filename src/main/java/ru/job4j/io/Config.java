@@ -9,7 +9,7 @@ import java.util.StringJoiner;
 
 public class Config {
     private final String path;
-    private final Map<String, String> values = new HashMap<String, String>();
+    private final Map<String, String> values = new HashMap<>();
 
     public Config(final String path) {
         this.path = path;
@@ -20,29 +20,40 @@ public class Config {
             read.lines()
                     .filter(s -> !(s.startsWith("#") || s.equals("")))
                     .forEach(s -> {
-                        if (s.startsWith("=") || s.endsWith("=")) {
-                            throw new IllegalArgumentException();
-                        }
-                        if (!s.contains("=")) {
-                            throw new IllegalArgumentException();
-                        }
-                            String[] stringMap = s.split("=");
-                            if (stringMap.length == 2) {
-                            values.put(stringMap[0], stringMap[1]);
-                        }
-                        if (stringMap[0].equals("")) {
-                            throw new IllegalArgumentException();
-                        }
-                        if (stringMap.length > 2) {
-                            StringJoiner joiner = new StringJoiner("=");
-                            for (int index = 1; index < stringMap.length; index++) {
-                                joiner.add(stringMap[index]);
-                                stringMap[1] = joiner.toString();
-                                values.put(stringMap[0], stringMap[1]);
-                            }
-
+                        String[] line = s.split("=");
+                        if (line.length == 2) {
+                            values.put(line[0], line[1]);
+                        } else {
+                            check();
                         }
                     });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void check() {
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+            for (String line = read.readLine(); line != null; line = read.readLine()) {
+                if (line.startsWith("=") || line.endsWith("=")) {
+                    throw new IllegalArgumentException();
+                }
+                if (!line.contains("=")) {
+                    throw new IllegalArgumentException();
+                }
+                String[] stringMap = line.split("=");
+                if (stringMap[0].equals("")) {
+                    throw new IllegalArgumentException();
+                }
+                if (stringMap.length > 2) {
+                    StringJoiner joiner = new StringJoiner("=");
+                    for (int index = 1; index < stringMap.length; index++) {
+                        joiner.add(stringMap[index]);
+                        stringMap[1] = joiner.toString();
+                        values.put(stringMap[0], stringMap[1]);
+                    }
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
