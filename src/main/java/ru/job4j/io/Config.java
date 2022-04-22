@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+/**
+ * В классе рассматривается модель, которая выполняет считывание данных настроек(файл конфигурации).
+ * Данные проверяются по шаблону.
+ */
 public class Config {
     private final String path;
     private final Map<String, String> values = new HashMap<>();
@@ -15,6 +19,10 @@ public class Config {
         this.path = path;
     }
 
+    /**
+     * Метод загружает пару ключ-значение в Map values.
+     * При чтении из файла могут быть пустые строки и комментарии, их нужно пропускать.
+     */
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines()
@@ -32,6 +40,9 @@ public class Config {
         }
     }
 
+    /**
+     * Метод проверяет на различные нарушения записи шаблона ключ=значение.
+     */
     private void check() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             for (String line = read.readLine(); line != null; line = read.readLine()) {
