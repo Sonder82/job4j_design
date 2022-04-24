@@ -11,13 +11,12 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(".");
-        Files.walkFileTree(start, new PrintFiles());
-        search(start, path -> path.toFile().getName().endsWith(".txt"))
+        search(start, p -> p.toFile().getName().endsWith(".txt"))
                 .forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
-        SearchFiles searcher = new SearchFiles(condition);
+        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(".txt"));
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
     }
