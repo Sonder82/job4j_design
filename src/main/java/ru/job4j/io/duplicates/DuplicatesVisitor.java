@@ -22,7 +22,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
      * Используем HashMap,где в key хранится fileProperty, в value список  file.
      * В случае дубликата fileProperty, file добавляем в список,который принадлежит этому fileProperty.
      *
-     * @param file  файл
+     * @param file файл
      * @param attrs атрибут файла
      * @return
      * @throws IOException исключение
