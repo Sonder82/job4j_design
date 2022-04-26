@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,6 +26,9 @@ public class Search {
         if (args.length < 2) {
             throw new IllegalArgumentException("Root folder and file extension are required. "
                     + "Usage java -jar dir.jar ROOT_FOLDER FILE_EXTENSION.");
+        }
+        if (!new File(args[0]).isDirectory()) {
+            throw new IllegalArgumentException("Search must start from Directory");
         }
         return true;
     }
