@@ -26,7 +26,6 @@ public class Search {
             throw new IllegalArgumentException("Root folder and file extension are required. "
                     + "Usage java -jar dir.jar ROOT_FOLDER FILE_EXTENSION.");
         }
-       // if ()
         return true;
     }
 }
