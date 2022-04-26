@@ -21,18 +21,18 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     /**
      * Используем HashMap,где в key хранится fileProperty, в value список  file.
      * В случае дубликата fileProperty, file добавляем в список,который принадлежит этому fileProperty.
-     * @param file файл
+     *
+     * @param file  файл
      * @param attrs атрибут файла
      * @return
-     * @throws IOException
+     * @throws IOException исключение
      */
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty fileProperty = new FileProperty(attrs.size(), file.toFile().getName());
-        if (!duplicates.containsKey(fileProperty)) {
-            duplicates.put(fileProperty, new ArrayList<>(List.of(file.toAbsolutePath())));
-        } else {
-            duplicates.get(fileProperty).add(file.toAbsolutePath());
+        List<Path> rsl = duplicates.putIfAbsent(fileProperty, new ArrayList<>(List.of(file.toAbsolutePath())));
+        if (rsl != null) {
+            rsl.add(file.toAbsolutePath());
         }
         return FileVisitResult.CONTINUE;
     }
@@ -40,6 +40,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     /**
      * С помощью Stream проходим по Hashmap.
      * В случае если в value записано несколько files(больше 1-го), это дубликаты.
+     *
      * @return список files дубликатов
      */
     public List<Path> getDuplicates() {
