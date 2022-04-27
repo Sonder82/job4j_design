@@ -11,13 +11,13 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) throws IOException {
         if (validation(args)) {
-            search(Paths.get(args[0]), p -> p.toFile().getName().endsWith(args[1]))
+            search(Paths.get(args[0]), p -> p.toFile().getName().endsWith(args[2] + args[1]))
                     .forEach(System.out::println);
         }
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
-        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(".txt"));
+        SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
     }
@@ -29,6 +29,9 @@ public class Search {
         }
         if (!new File(args[0]).isDirectory()) {
             throw new IllegalArgumentException("Search must start from Directory");
+        }
+        if (!args[2].startsWith(".")) {
+            throw new IllegalArgumentException("Extension must start with dot");
         }
         return true;
     }
