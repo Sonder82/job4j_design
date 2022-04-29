@@ -18,25 +18,24 @@ public class ArgsName {
     private void parse(String[] args) {
         for (String arg : args) {
             String[] argsSplit = arg.split("=", 2);
-            if (argsSplit.length == 2) {
+            if (check(argsSplit)) {
                 for (String string : argsSplit) {
                     values.put(string.replace("-", ""), argsSplit[1]);
                 }
             }
+        }
+    }
 
-            if (argsSplit.length > 2) {
-                StringJoiner joiner = new StringJoiner("=");
-                for (int j = 1; j < argsSplit.length; j++) {
-                    joiner.add(argsSplit[j]);
-                    argsSplit[1] = joiner.toString();
-                }
-                values.put(argsSplit[0].replace("-", ""), argsSplit[1]);
-            }
+    private boolean check(String[] argsSplit) {
+        if (!argsSplit[0].startsWith("-") || argsSplit[1] == null) {
+            throw new IllegalArgumentException();
+        } else {
+            return true;
         }
     }
 
     public static ArgsName of(String[] args) {
-        if (args.length > 1 && args[1].endsWith("=")) {
+        if ((args.length == 0) || (args.length > 1 && args[1].endsWith("="))) {
             throw new IllegalArgumentException();
         }
         ArgsName names = new ArgsName();
