@@ -35,7 +35,9 @@ public class ArgsName {
     }
 
     public static ArgsName of(String[] args) {
-        if ((args.length == 0) || (args.length > 1 && args[1].endsWith("="))) {
+        if ((args.length == 0)
+                || (args.length > 1 && (args[1].endsWith("=")
+                || (args[0].startsWith("-=") || (args[1].startsWith("-=")))))) {
             throw new IllegalArgumentException();
         }
         ArgsName names = new ArgsName();

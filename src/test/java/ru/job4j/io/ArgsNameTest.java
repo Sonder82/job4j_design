@@ -40,4 +40,9 @@ public class ArgsNameTest {
     public void whenArrayLengthIsNull() {
         ArgsName jvm = ArgsName.of(new String[]{});
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenWrongKey() {
+        ArgsName jvm = ArgsName.of(new String[]{"-encoding=UTF-8", "-=512"});
+    }
 }
