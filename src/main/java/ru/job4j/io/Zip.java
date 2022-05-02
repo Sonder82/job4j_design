@@ -1,7 +1,6 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import static ru.job4j.io.Search.search;
-import static ru.job4j.io.Search.validation;
 
 public class Zip {
 
@@ -26,29 +24,20 @@ public class Zip {
         }
     }
 
-
-    public void packSingleFile(File source, File target) {
-        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
-            zip.putNextEntry(new ZipEntry(source.getPath()));
-            try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
-                zip.write(out.readAllBytes());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void validationDirectory(Path directory) {
+    private static void validationDirectoryAndExtension(Path directory, String extension) {
         if (!directory.toFile().isDirectory()) {
-            throw new IllegalArgumentException("Don't found Directory");
+            throw new IllegalArgumentException("Don't found Directory or wrong extension");
+        }
+        if (!extension.startsWith(".")) {
+            throw new IllegalArgumentException("Extension doesn't start with dot");
         }
     }
 
     public static void main(String[] args) throws IOException {
         ArgsName name = ArgsName.of(args);
         Path directory = Paths.get(name.get("d"));
-        validationDirectory(directory);
         String extension = name.get("e");
+        validationDirectoryAndExtension(directory, extension);
         Path directoryToZip = Paths.get(name.get("o"));
             Zip zip = new Zip();
             zip.packFiles(
