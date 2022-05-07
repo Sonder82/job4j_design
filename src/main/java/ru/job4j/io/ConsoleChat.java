@@ -59,7 +59,7 @@ public class ConsoleChat {
                         log.add(phrasesUser);
                         break;
                     default:
-                        if (dialogConsole.equals(CONTINUE)) {
+                        if (CONTINUE.equals(dialogConsole)) {
                             bot = phrasesBot.get(new Random().nextInt(phrasesBot.size()));
                             log.add(phrasesUser);
                             log.add(bot);
