@@ -1,9 +1,6 @@
 package ru.job4j.io;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +12,10 @@ import java.util.Scanner;
  * В качестве входных данных задается путь к файлу path, разделитель delimiter, приемник данных out и фильтр по столбцам filter.
  */
 public class CSVReader {
+
     /**
      * Метод выполняет валидацию входных параметров
+     *
      * @param args входные аргументы
      * @return argsname
      */
@@ -51,12 +50,13 @@ public class CSVReader {
      * Метод должен прочитать файл по пути file.csv и вывести только столбцы name, age в консоль
      * Согласно, аргумента filter, находим индекс требуемых столбцов в первой строке
      * По индексу столбцов находим остальные требуемые столбцы
+     *
      * @param argsName наименование аргументов
      */
     public static void handle(ArgsName argsName) {
+        StringBuilder stringBuilder = new StringBuilder();
         List<String> result = new ArrayList<>();
         String delimiter = argsName.get("delimiter");
-        String out = argsName.get("out");
         List<String> stringColumnNames = Arrays.asList(argsName.get("filter").split(","));
         List<Integer> columnIndexes = new ArrayList<>();
 
@@ -69,48 +69,46 @@ public class CSVReader {
                 List<String> line = Arrays.asList(scanner.nextLine().split(delimiter));
                 columnIndexes.forEach(index -> result.add(line.get(index)));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        if ("stdout".equals(out)) {
-            StringBuilder stringBuilder = new StringBuilder();
             for (int indexListResult = 0; indexListResult < result.size();) {
                 for (int indexFilter = 0; indexFilter < columnIndexes.size(); indexFilter++) {
                     stringBuilder.append(result.get(indexListResult++));
-                    if (indexFilter == columnIndexes.size() - 1) {
-                        System.out.println(stringBuilder);
-                    } else {
+                    if (indexFilter != columnIndexes.size() - 1) {
                         stringBuilder.append(delimiter);
                     }
-                }
-                stringBuilder.setLength(0);
-            }
-        } else {
-            try (PrintWriter writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(out)))) {
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int indexListResult = 0; indexListResult < result.size();) {
-                    for (int indexFilter = 0; indexFilter < columnIndexes.size(); indexFilter++) {
-                        stringBuilder.append(result.get(indexListResult++));
-                        if (indexFilter == columnIndexes.size() - 1) {
-                            writer.println(stringBuilder);
-                        } else {
-                            stringBuilder.append(delimiter);
-                        }
+                    if (indexFilter == columnIndexes.size() - 1) {
+                        stringBuilder.append(System.lineSeparator());
                     }
-                    stringBuilder.setLength(0);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            }
+            writeCSV(String.valueOf(stringBuilder), argsName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Метод принимает на вход строку и аргументы.
+     * Задача метода вывести строки в консоль или записать в файл.
+     * Зависит от того что прописано в аргументах
+     * @param string строка из файла csv
+     * @param argsName аргументы
+     * @throws IOException
+     */
+    public static void writeCSV(String string, ArgsName argsName) throws IOException {
+        String out = argsName.get("out");
+        if ("stdout".equals(out)) {
+            System.out.println(string);
+        } else {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(out))) {
+                bw.write(string);
             }
         }
     }
 
-
     /**
      * В качестве входных данных задается путь к файлу path, разделитель delimiter, приемник данных out и фильтр по
      * столбцам filter.
+     *
      * @param args -path=data/file.csv -delimiter=";"  -out=stdout -filter=name,age
      * @throws Exception - чтение файла.
      */
@@ -118,3 +116,4 @@ public class CSVReader {
         handle(validation(args));
     }
 }
+
