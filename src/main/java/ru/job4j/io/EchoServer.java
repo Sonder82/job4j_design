@@ -9,21 +9,19 @@ import java.net.Socket;
 
 public class EchoServer {
     public static void main(String[] args) throws IOException {
-        String textBy;
         try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(socket.getInputStream()))) {
-                    textBy = in.readLine();
-                    while (!textBy.equals("Bye")) {
-                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                        for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
-                            System.out.println(str);
-                        }
-                        System.out.println("The server is shut down");
-                        socket.close();
+                     BufferedReader in = new BufferedReader(
+                             new InputStreamReader(socket.getInputStream()))) {
+                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                    String text = in.readLine();
+                    if (text.contains("Bye")) {
+                        System.out.println("Server is closed");
+                        server.close();
+                    } else {
+                        System.out.println(text);
                     }
                     out.flush();
                 }
