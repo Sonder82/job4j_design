@@ -20,6 +20,8 @@ public class UsageLog4j {
         LOG.debug("Size file is : {}", file);
         long distance = 149597870700L;
         LOG.debug("Distance to Sun at meters : {}", distance);
+        short month = 3;
+        LOG.debug("Count summer month : {}", month);
 
     }
 }
