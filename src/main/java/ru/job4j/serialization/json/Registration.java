@@ -9,6 +9,14 @@ public class Registration {
         this.numberPlate = numberPlate;
     }
 
+    public int getRegionCode() {
+        return regionCode;
+    }
+
+    public String getNumberPlate() {
+        return numberPlate;
+    }
+
     @Override
     public String toString() {
         return "Registration{" + "regionCode=" + regionCode + ", numberPlate='" + numberPlate + '\'' + '}';
