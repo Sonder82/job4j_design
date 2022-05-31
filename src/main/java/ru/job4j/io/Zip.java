@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import ru.job4j.io.searchfiles.ArgsName;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -7,7 +9,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import static ru.job4j.io.Search.search;
+import static ru.job4j.io.searchfiles.Search.search;
 
 public class Zip {
 

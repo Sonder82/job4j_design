@@ -1,8 +1,7 @@
-package ru.job4j.io;
+package ru.job4j.io.searchfiles;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringJoiner;
 
 public class ArgsName {
 
