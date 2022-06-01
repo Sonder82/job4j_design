@@ -62,10 +62,50 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <finalName>duplicatesFinder</finalName>
+              <transformers>
+                <transformer>
+                  <mainClass>ru.job4j.io.duplicates.DuplicatesFinder</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
               <finalName>find</finalName>
               <transformers>
                 <transformer>
                   <mainClass>ru.job4j.io.searchfiles.FindFiles</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <finalName>csvReader</finalName>
+              <transformers>
+                <transformer>
+                  <mainClass>ru.job4j.io.CSVReader</mainClass>
                 </transformer>
               </transformers>
             </configuration>
