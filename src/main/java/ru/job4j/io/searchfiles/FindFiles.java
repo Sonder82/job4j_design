@@ -24,6 +24,7 @@ public class FindFiles {
         }
         if ("mask".equals(typeOfSearch)) {
             String name = argsName.get("n")
+                    .replace(".", "[.]")
                     .replace("?", ".")
                     .replace("*", ".+");
             listPath = search(start, path -> Pattern.matches(name, path.toFile().getName()));
