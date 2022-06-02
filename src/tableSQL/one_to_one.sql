@@ -13,4 +13,3 @@ insert into vehicle_identification (vin) values ('789456');
 insert into car(model, vin_id) VALUES ('BMW', 1);
 
 select * from car;
-select * from vehicle_identification  where id in(select id from car);

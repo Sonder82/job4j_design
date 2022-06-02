@@ -14,5 +14,3 @@ insert into orders(number, customer_id) VALUES ('878', 1);
 
 select * from orders;
 select * from customers where id in(select id from orders);
-
-
