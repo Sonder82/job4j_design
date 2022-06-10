@@ -48,7 +48,7 @@ select b.color
 from body b
 left join car c
 on c.body_id = b.id
-where c.model is null;
+where c.body_id is null;
 
 -- Модель двигателя (engine_code), которого нет ни в одном автомобиле(car)
 select e.engine_code
