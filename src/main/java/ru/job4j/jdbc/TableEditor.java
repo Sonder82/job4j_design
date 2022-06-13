@@ -1,8 +1,7 @@
 package ru.job4j.jdbc;
 
-import ru.job4j.io.Config;
-
-import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,7 +14,7 @@ public class TableEditor implements AutoCloseable {
     private static Connection connection;
     private Properties properties;
 
-    public TableEditor(Properties properties) throws SQLException, ClassNotFoundException {
+    public TableEditor(Properties properties) throws SQLException, IOException {
         this.properties = properties;
         initConnection();
     }
@@ -23,12 +22,13 @@ public class TableEditor implements AutoCloseable {
     /**
      * Метод выполняет подключение к базе данных через DriverManager.
      */
-    private void initConnection() throws SQLException, ClassNotFoundException {
-        Config config = new Config("app.properties");
-        config.load();
-        Class.forName(config.value("driver_class"));
-        connection = DriverManager.getConnection(config.value("url"), config.value("login"),
-                (config.value("password")));
+    private void initConnection() throws SQLException, IOException {
+        Properties properties = new Properties();
+        try (InputStream inputStream = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
+            properties.load(inputStream);
+        }
+        connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("login"),
+                (properties.getProperty("password")));
     }
 
     /**
@@ -134,10 +134,9 @@ public class TableEditor implements AutoCloseable {
 
     public static void main(String[] args) throws Exception {
         Properties properties = new Properties();
-        try (FileInputStream fileInputStream = new FileInputStream("app.properties")) {
-            properties.load(fileInputStream);
+        try (InputStream inputStream = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
+            properties.load(inputStream);
         }
-
         try (TableEditor tableEditor = new TableEditor(properties)) {
             tableEditor.createTable("demoTable");
             System.out.println(getTableScheme(connection, "demoTable"));
