@@ -1,6 +1,5 @@
 package ru.job4j.jdbc;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +13,7 @@ public class TableEditor implements AutoCloseable {
     private static Connection connection;
     private Properties properties;
 
-    public TableEditor(Properties properties) throws SQLException, IOException {
+    public TableEditor(Properties properties) throws SQLException, ClassNotFoundException {
         this.properties = properties;
         initConnection();
     }
@@ -22,11 +21,8 @@ public class TableEditor implements AutoCloseable {
     /**
      * Метод выполняет подключение к базе данных через DriverManager.
      */
-    private void initConnection() throws SQLException, IOException {
-        Properties properties = new Properties();
-        try (InputStream inputStream = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
-            properties.load(inputStream);
-        }
+    private void initConnection() throws SQLException, ClassNotFoundException {
+        Class.forName(properties.getProperty("driver_class"));
         connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("login"),
                 (properties.getProperty("password")));
     }
