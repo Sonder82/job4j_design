@@ -1,10 +1,60 @@
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:18 +0300] "GET /items/ajax.html HTTP/1.1" 404 1113
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /job4j.ru/profile HTTP/1.1" 302 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /job4j.ru/profile/ HTTP/1.1" 404 1110
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:34 +0300] "GET /job4j.ru/profileNew/ HTTP/1.1" 404 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:48 +0300] "GET / HTTP/1.1" 200 11488
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /404.png HTTP/1.1" 200 5103
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /tomcat.css HTTP/1.1" 200 5931
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-nav.png HTTP/1.1" 200 1404
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-button.png HTTP/1.1" 200 713
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-middle.png HTTP/1.1" 200 4048
+[0.090s][info][gc] Using The Z Garbage Collector
+[0.261s][info][gc] GC(0) Garbage Collection (Warmup) 4M(17%)->4M(17%)
+[0.349s][info][gc] GC(1) Garbage Collection (Allocation Rate) 4M(17%)->4M(17%)
+[0.466s][info][gc] GC(2) Garbage Collection (Allocation Rate) 4M(17%)->6M(25%)
+[0.555s][info][gc] GC(3) Garbage Collection (Warmup) 6M(25%)->4M(17%)
+[0.646s][info][gc] GC(4) Garbage Collection (Allocation Rate) 4M(17%)->4M(17%)
+[0.738s][info][gc] GC(5) Garbage Collection (Allocation Rate) 4M(17%)->4M(17%)
+[0.849s][info][gc] GC(6) Garbage Collection (Allocation Rate) 4M(17%)->4M(17%)
+[0.946s][info][gc] GC(7) Garbage Collection (Allocation Rate) 4M(17%)->4M(17%)
+[1.042s][info][gc] GC(8) Garbage Collection (Allocation Rate) 4M(17%)->4M(17%)
+[1.346s][info][gc] GC(9) Garbage Collection (Allocation Rate) 6M(25%)->6M(25%)
+[1.638s][info][gc] GC(10) Garbage Collection (Allocation Rate) 6M(25%)->6M(25%)
+[1.760s][info][gc] GC(11) Garbage Collection (Allocation Rate) 6M(25%)->6M(25%)
+[1.855s][info][gc] GC(12) Garbage Collection (Allocation Rate) 6M(25%)->4M(17%)
+[6.552s][info][gc] GC(13) Garbage Collection (Warmup) 8M(33%)->6M(25%)
+[18.591s][info][gc] GC(14) Garbage Collection (Proactive) 12M(50%)->6M(25%)
+[27.951s][info][gc] GC(15) Garbage Collection (Proactive) 10M(42%)->6M(25%)
+[40.980s][info][gc] GC(16) Garbage Collection (Proactive) 10M(42%)->4M(17%)
+[50.976s][info][gc] GC(17) Garbage Collection (Proactive) 8M(33%)->4M(17%)
+[62.963s][info][gc] GC(18) Garbage Collection (Proactive) 8M(33%)->4M(17%)
+[66.187s][info][gc] GC(19) Garbage Collection (Proactive) 8M(33%)->6M(25%)
+[74.974s][info][gc] GC(20) Garbage Collection (Proactive) 10M(42%)->8M(33%)
+[101.088s][info][gc] GC(21) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[113.070s][info][gc] GC(22) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[118.676s][info][gc] GC(23) Garbage Collection (Proactive) 12M(50%)->12M(50%)
+[144.061s][info][gc] GC(24) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[174.047s][info][gc] GC(25) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[201.055s][info][gc] GC(26) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[230.162s][info][gc] GC(27) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[258.166s][info][gc] GC(28) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[283.159s][info][gc] GC(29) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[308.177s][info][gc] GC(30) Garbage Collection (Proactive) 16M(67%)->8M(33%)
+[318.292s][info][gc] GC(31) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[332.247s][info][gc] GC(32) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[343.259s][info][gc] GC(33) Garbage Collection (Proactive) 12M(50%)->12M(50%)
+[369.273s][info][gc] GC(34) Garbage Collection (Proactive) 16M(67%)->8M(33%)
+[383.267s][info][gc] GC(35) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[397.261s][info][gc] GC(36) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[410.270s][info][gc] GC(37) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[425.272s][info][gc] GC(38) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[440.357s][info][gc] GC(39) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[448.946s][info][gc] Allocation Stall (main) 7.156ms
+[448.947s][info][gc] GC(40) Garbage Collection (Allocation Rate) 20M(83%)->16M(67%)
+[448.984s][info][gc] Allocation Stall (main) 18.719ms
+[448.984s][info][gc] GC(41) Garbage Collection (Allocation Stall) 24M(100%)->14M(58%)
+[449.061s][info][gc] GC(42) Garbage Collection (Allocation Rate) 22M(92%)->8M(33%)
+[449.174s][info][gc] GC(43) Garbage Collection (Allocation Rate) 8M(33%)->10M(42%)
+[449.255s][info][gc] GC(44) Garbage Collection (Allocation Rate) 10M(42%)->10M(42%)
+[449.355s][info][gc] GC(45) Garbage Collection (Allocation Rate) 10M(42%)->8M(33%)
+[449.473s][info][gc] GC(46) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[449.584s][info][gc] GC(47) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[449.678s][info][gc] GC(48) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[449.786s][info][gc] GC(49) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[449.875s][info][gc] GC(50) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[464.392s][info][gc] GC(51) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[479.383s][info][gc] GC(52) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[494.371s][info][gc] GC(53) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[509.376s][info][gc] GC(54) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[524.379s][info][gc] GC(55) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[539.384s][info][gc] GC(56) Garbage Collection (Proactive) 12M(50%)->8M(33%)
