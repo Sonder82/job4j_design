@@ -18,6 +18,14 @@ insert into books (name, author_id) values ('Дубровский', 1);
 insert into books (name, author_id) values ('Мертвые души', 2);
 insert into books (name, author_id) values ('Вий', 2);
 
+create table students (
+    id serial primary key,
+    name varchar(50)
+);
+
+insert into students (name) values ('Иван Иванов');
+insert into students (name) values ('Петр Петров');
+
 create table orders (
     id serial primary key,
     active boolean default true,
@@ -31,13 +39,7 @@ insert into orders (book_id, student_id) values (5, 2);
 insert into orders (book_id, student_id) values (4, 1);
 insert into orders (book_id, student_id) values (2, 2);
 
-create table students (
-    id serial primary key,
-    name varchar(50)
-);
 
-insert into students (name) values ('Иван Иванов');
-insert into students (name) values ('Петр Петров');
 
 create view show_student_with_max_count_orders
     as select s.name as student, count(o.id) as count_orders
