@@ -3,7 +3,7 @@ create or replace function tax_value_before()
 $$
     BEGIN
         update products
-        set tax = price * 0.10;
+        new.price = new.price * 1.10;
         return new;
     END;
 $$

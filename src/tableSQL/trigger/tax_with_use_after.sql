@@ -6,7 +6,8 @@ create or replace function tax_value()
 $$
     BEGIN
         update products
-        set tax = price * 0.20;
+        set tax = price * 0.20
+        where id = new.id;
         return new;
     END;
 $$
