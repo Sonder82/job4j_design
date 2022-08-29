@@ -1,13 +1,10 @@
-ALTER TABLE products
-ADD tax float;
-
 create or replace function tax_value()
     returns trigger as
 $$
     BEGIN
         update products
-        set tax = price * 0.20
-        where id = new.id;
+        set price = price * 1.20
+        where id = (select id from inserted);
         return new;
     END;
 $$

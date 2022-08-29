@@ -2,7 +2,6 @@ create or replace function tax_value_before()
     returns trigger as
 $$
     BEGIN
-        update products
         new.price = new.price * 1.10;
         return new;
     END;
