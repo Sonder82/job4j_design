@@ -78,6 +78,24 @@ FETCH first from cursor_products;
   1 | product_1 |     1 |     5
 */
 
+--сдвигаем курсор на последнюю строку
+fetch last from cursor_products;
+/*
+ id |    name    | count | price
+----+------------+-------+-------
+ 20 | product_20 |    20 |   100
+*/
+
+--поднимаемся на 18 строчек и далее считываем строчку перед курсором
+--это будет первая строка
+move backward 18 from cursor_products;
+fetch prior from cursor_products;
+/*
+ id |   name    | count | price
+----+-----------+-------+-------
+  1 | product_1 |     1 |     5
+*/
+
 --закрываем курсор
 close cursor_products;
 
