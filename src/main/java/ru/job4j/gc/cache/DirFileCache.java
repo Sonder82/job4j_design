@@ -1,5 +1,8 @@
 package ru.job4j.gc.cache;
 
+import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,6 +30,7 @@ public class DirFileCache extends AbstractCache<String, String> {
      * @param key относительный путь к файлу в директории
      * @return содержимое файла в виде строки
      */
+
     @Override
     protected String load(String key) {
 
@@ -34,7 +38,7 @@ public class DirFileCache extends AbstractCache<String, String> {
         try {
             contents = Files.readString(Paths.get(cachingDir, key));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Данного файла в директории не существует.");
         }
         return contents;
     }

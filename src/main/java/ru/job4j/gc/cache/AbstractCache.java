@@ -39,7 +39,7 @@ public abstract class AbstractCache<K, V> {
      * @return безопасную ссылку на объект кеша
      */
     public V get(K key) {
-        V value = cache.get(key).get();
+        V value = cache.getOrDefault(key, new SoftReference<>(null)).get();
         if (value == null) {
             value = load(key);
             SoftReference softReference = new SoftReference(value);
