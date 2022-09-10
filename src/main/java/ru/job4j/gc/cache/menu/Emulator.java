@@ -35,8 +35,9 @@ public class Emulator {
             System.out.println(userChoice);
             if (SELECT_CACHE_DIRECTORY == userChoice) {
                 System.out.println(VIEW);
+                String dirName = scanner.nextLine();
                 Path directory = Path.of("C:\\projects\\job4j_design\\src\\"
-                       + "main\\java\\ru\\job4j\\gc\\cache\\files");
+                       + "main\\java\\ru\\job4j\\gc\\cache\\" + dirName);
                 dirFileCache = new DirFileCache(String.valueOf(directory));
                 System.out.println("Задана кэшируемая директория по пути :" + directory);
             } else if (LOAD_CACHE_IN_FILE == userChoice) {
