@@ -13,13 +13,13 @@ public class Emulator {
     public static final Integer GET_CACHE_FROM_FILE = 3;
 
     public static final String OPTION = "Выберите меню";
-    public static final String VIEW = "Здесь будет отображаться кэшируемая директория";
+    public static final String VIEW = "Задать кэшируемую директория";
     public static final String LOAD = "Загрузить содержимое файла в кэш. Укажите требуемый файл.";
     public static final String GET = "Получить содержимое файла из кэша. Укажите требуемый файл";
     public static final String EXIT = "Конец работы";
 
     public static final String MENU = """
-                Введите 1, чтобы отобразить  кэшируемую директорию.
+                Введите 1, чтобы задать  кэшируемую директорию. Для этого введите полный путь к папке.
                 Введите 2, чтобы загрузить содержимое файла в кэш.
                 Введите 3, чтобы получить содержимое файла из кэша.
                 Введите любое другое число для выхода.
@@ -36,10 +36,7 @@ public class Emulator {
             if (SELECT_CACHE_DIRECTORY == userChoice) {
                 System.out.println(VIEW);
                 String dirName = scanner.nextLine();
-                Path directory = Path.of("C:\\projects\\job4j_design\\src\\"
-                       + "main\\java\\ru\\job4j\\gc\\cache\\" + dirName);
-                dirFileCache = new DirFileCache(String.valueOf(directory));
-                System.out.println("Задана кэшируемая директория по пути :" + directory);
+                dirFileCache = new DirFileCache(dirName);
             } else if (LOAD_CACHE_IN_FILE == userChoice) {
                 System.out.println(LOAD);
                 String file = scanner.nextLine();
