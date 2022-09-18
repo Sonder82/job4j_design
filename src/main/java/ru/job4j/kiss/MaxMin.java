@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MaxMin {
 
-    static <T> T findMaxMin(List<T> value, Comparator<T> comparator) {
+    private <T> T findMaxMin(List<T> value, Comparator<T> comparator) {
 
         if (value.isEmpty()) {
             throw new IllegalArgumentException("value не должен быть пустым");
