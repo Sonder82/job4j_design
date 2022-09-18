@@ -4,13 +4,29 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MaxMin {
-    public User max(List<User> value) {
-        value.sort(Comparator.comparing(User::getName));
-        return value.get(value.size() - 1);
+
+    static <T> T findMaxMin(List<T> value, Comparator<T> comparator) {
+
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException("value не должен быть пустым");
+        }
+        T result;
+            result = value.get(0);
+            for (T val : value) {
+                if (comparator.compare(val, result) > 0) {
+                    result = val;
+                }
+            }
+        return result;
     }
 
-    public User min(List<User> value) {
-        value.sort(Comparator.comparingInt(User::getAge));
-        return value.get(0);
+    public <T> T max(List<T> value, Comparator<T> comparator) {
+        return findMaxMin(value, comparator);
     }
+
+    public <T> T min(List<T> value, Comparator<T> comparator) {
+        return findMaxMin(value, comparator.reversed());
+    }
+
+
 }
