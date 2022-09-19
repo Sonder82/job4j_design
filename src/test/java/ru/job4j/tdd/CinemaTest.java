@@ -1,6 +1,7 @@
 package ru.job4j.tdd;
 
 import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
@@ -9,10 +10,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@Disabled
 class CinemaTest {
 
     @Test
-    @Ignore
     public void whenBuy() {
         Account account = new AccountCinema();
         Cinema cinema = new Cinema3D();
@@ -30,7 +31,6 @@ class CinemaTest {
     }
 
     @Test
-    @Ignore
     public void whenInvalidPlace() {
         Account account = new AccountCinema();
         Cinema cinema = new Cinema3D();
@@ -41,7 +41,6 @@ class CinemaTest {
     }
 
     @Test
-    @Ignore
     public void whenInvalidDate() {
         Account account = new AccountCinema();
         Cinema cinema = new Cinema3D();
@@ -52,7 +51,6 @@ class CinemaTest {
     }
 
     @Test
-    @Ignore
     public void whenPlaceIsReserved() {
         Account account = new AccountCinema();
         Cinema cinema = new Cinema3D();
