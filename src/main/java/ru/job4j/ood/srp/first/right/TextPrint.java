@@ -1,8 +1,9 @@
 package ru.job4j.ood.srp.first.right;
 
-public class TextPrint {
+public class TextPrint implements Printable {
 
-    public void printText(Printable print) {
-        System.out.println(print.getContent());
+    @Override
+    public void print(String text) {
+        System.out.println(text);
     }
 }
