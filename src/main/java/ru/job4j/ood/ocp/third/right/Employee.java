@@ -2,16 +2,16 @@ package ru.job4j.ood.ocp.third.right;
 
 import java.util.Objects;
 
-public abstract class Employee {
+public  class Employee {
     private int id;
-    private String name;
+    private String category;
+    private double salary;
 
-    public Employee(int id, String name) {
+    public Employee(int id, String category, double salary) {
         this.id = id;
-        this.name = name;
+        this.category = category;
+        this.salary = salary;
     }
-
-    public abstract double calculateBonus(double salary);
 
     public int getId() {
         return id;
@@ -21,12 +21,20 @@ public abstract class Employee {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCategory() {
+        return category;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     @Override
@@ -38,19 +46,21 @@ public abstract class Employee {
             return false;
         }
         Employee employee = (Employee) o;
-        return id == employee.id && Objects.equals(name, employee.name);
+        return id == employee.id && Double.compare(employee.salary, salary) == 0
+                && Objects.equals(category, employee.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, category, salary);
     }
 
     @Override
     public String toString() {
         return "Employee{"
                 + "id=" + id
-                + ", name='" + name + '\''
+                + ", category='" + category + '\''
+                + ", salary=" + salary
                 + '}';
     }
 }
