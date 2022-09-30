@@ -3,6 +3,7 @@ package ru.job4j.design.srp;
 import java.util.function.Predicate;
 
 public class ReportForIT implements Report {
+    private Constants constants;
 
     private Store store;
 
@@ -14,19 +15,25 @@ public class ReportForIT implements Report {
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
         text.append("<html>")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
                 .append("<head>")
-                .append(System.lineSeparator())
-                .append("<title>Name; Salary;</title>")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
+                .append("<title>Name; Hired; Fired; Salary;</title>")
+                .append(Constants.LINE_SEPARATOR)
                 .append("</head>")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
                 .append("<body>")
-                .append(System.lineSeparator());
+                .append(Constants.LINE_SEPARATOR);
         for (Employee employee : store.findBy(filter)) {
             text.append(employee.getName()).append(";")
+                    .append(Constants.DATE_FORMAT.format(employee.getHired().getTime())).append(";")
+                    .append(Constants.DATE_FORMAT.format(employee.getFired().getTime())).append(";")
                     .append(employee.getSalary()).append(";")
-                    .append(System.lineSeparator());
+                    .append(Constants.LINE_SEPARATOR)
+                    .append("</body>")
+                    .append(Constants.LINE_SEPARATOR)
+                    .append("</html>")
+                    .append(Constants.LINE_SEPARATOR);
         }
         return text.toString();
     }

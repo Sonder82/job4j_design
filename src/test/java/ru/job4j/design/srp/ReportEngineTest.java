@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.*;
-import static ru.job4j.design.srp.ReportEngine.DATE_FORMAT;
 
 class ReportEngineTest {
 
@@ -18,12 +17,12 @@ class ReportEngineTest {
         Report engine = new ReportEngine(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
                 .append(worker.getName()).append(";")
-                .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
-                .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
+                .append(Constants.DATE_FORMAT.format(worker.getHired().getTime())).append(";")
+                .append(Constants.DATE_FORMAT.format(worker.getFired().getTime())).append(";")
                 .append(worker.getSalary()).append(";")
-                .append(System.lineSeparator());
+                .append(Constants.LINE_SEPARATOR);
         assertThat(engine.generate(employee -> true)).isEqualTo(expect.toString());
 
     }
@@ -37,13 +36,13 @@ class ReportEngineTest {
         Report engine = new ReportForAccounting(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; SalaryGross; SalaryTotal")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
                 .append(worker.getName()).append(";")
-                .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
-                .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
+                .append(Constants.DATE_FORMAT.format(worker.getHired().getTime())).append(";")
+                .append(Constants.DATE_FORMAT.format(worker.getFired().getTime())).append(";")
                 .append(worker.getSalary()).append(";")
-                .append(worker.getSalary() * 1.13).append(";")
-                .append(System.lineSeparator());
+                .append(worker.getSalary() * Constants.SALARY_TAX).append(";")
+                .append(Constants.LINE_SEPARATOR);
         assertThat(engine.generate(employee -> worker.getSalary() > 80)).isEqualTo(expect.toString());
     }
 
@@ -58,13 +57,13 @@ class ReportEngineTest {
         Report engine = new ReportForHR(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; SalaryGross")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
                 .append(workerSecond.getName()).append(";")
                 .append(workerSecond.getSalary()).append(";")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
                 .append(workerFirst.getName()).append(";")
                 .append(workerFirst.getSalary()).append(";")
-                .append(System.lineSeparator());
+                .append(Constants.LINE_SEPARATOR);
         assertThat(engine.generate(employee -> true)).isEqualTo(expect.toString());
     }
 
@@ -77,18 +76,24 @@ class ReportEngineTest {
         Report engine = new ReportForIT(store);
         StringBuilder expect = new StringBuilder()
                 .append("<html>")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
                 .append("<head>")
-                .append(System.lineSeparator())
-                .append("<title>Name; Salary;</title>")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
+                .append("<title>Name; Hired; Fired; Salary;</title>")
+                .append(Constants.LINE_SEPARATOR)
                 .append("</head>")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
                 .append("<body>")
-                .append(System.lineSeparator())
+                .append(Constants.LINE_SEPARATOR)
                 .append(worker.getName()).append(";")
+                .append(Constants.DATE_FORMAT.format(worker.getHired().getTime())).append(";")
+                .append(Constants.DATE_FORMAT.format(worker.getFired().getTime())).append(";")
                 .append(worker.getSalary()).append(";")
-                .append(System.lineSeparator());
+                .append(Constants.LINE_SEPARATOR)
+                .append("</body>")
+                .append(Constants.LINE_SEPARATOR)
+                .append("</html>")
+                .append(Constants.LINE_SEPARATOR);
         assertThat(engine.generate(employee -> true)).isEqualTo(expect.toString());
 
     }
