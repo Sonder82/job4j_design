@@ -3,7 +3,6 @@ package ru.job4j.design.srp;
 import java.util.function.Predicate;
 
 public class ReportForIT implements Report {
-    private Constants constants;
 
     private Store store;
 
@@ -29,12 +28,12 @@ public class ReportForIT implements Report {
                     .append(Constants.DATE_FORMAT.format(employee.getHired().getTime())).append(";")
                     .append(Constants.DATE_FORMAT.format(employee.getFired().getTime())).append(";")
                     .append(employee.getSalary()).append(";")
-                    .append(Constants.LINE_SEPARATOR)
-                    .append("</body>")
-                    .append(Constants.LINE_SEPARATOR)
-                    .append("</html>")
                     .append(Constants.LINE_SEPARATOR);
         }
+        text.append("</body>")
+                .append(Constants.LINE_SEPARATOR)
+                .append("</html>")
+                .append(Constants.LINE_SEPARATOR);
         return text.toString();
     }
 }
