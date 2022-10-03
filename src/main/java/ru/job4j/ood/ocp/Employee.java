@@ -1,19 +1,17 @@
 package ru.job4j.ood.ocp;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Employee {
 
     private String name;
-    private int age;
+    private double salary;
+    private String category;
 
-    public Employee(String name, int age) {
+    public Employee(String name, double salary, String category) {
         this.name = name;
-        this.age = age;
+        this.salary = salary;
+        this.category = category;
     }
 
 
@@ -25,12 +23,20 @@ public class Employee {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public double getSalary() {
+        return salary;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setSalary(int age) {
+        this.salary = salary;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
@@ -42,41 +48,21 @@ public class Employee {
             return false;
         }
         Employee employee = (Employee) o;
-        return age == employee.age && Objects.equals(name, employee.name);
+        return salary == employee.salary && Objects.equals(name, employee.name)
+                && Objects.equals(category, employee.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age);
+        return Objects.hash(name, salary, category);
     }
 
     @Override
     public String toString() {
         return "Employee{"
                 + "name='" + name + '\''
-                + ", age=" + age
+                + ", age=" + salary
+                + ", category='" + category + '\''
                 + '}';
-    }
-
-    /**
-     * Нарушает принцип OCP, т.к. в случае необходимости использования поиска по другим критериям,
-     * потребуется изменить метод, добавить Predicate.
-     */
-
-    private static class SearchEmployee {
-        List<Employee> searchName(List<Employee> employees, String name) {
-            return employees.stream()
-                    .filter(n -> n.getName().contains(name))
-                    .collect(Collectors.toList());
-        }
-    }
-
-    /**
-     * Нарушает принцип OCP, т.к. реализация в параметрах. В параметрах используем абстракцию.
-     */
-    public List<Employee> minAge(ArrayList<Employee> value) {
-        return value.stream()
-                .min(Comparator.comparing(Employee::getAge))
-                .stream().toList();
     }
 }
