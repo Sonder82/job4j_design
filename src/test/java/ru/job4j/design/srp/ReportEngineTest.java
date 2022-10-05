@@ -98,7 +98,7 @@ class ReportEngineTest {
         assertThat(engine.generate(employee -> true)).isEqualTo(expect.toString());
 
     }
-
+/**
     @Test
     void generateForJSON() throws JAXBException {
         MemStore store = new MemStore();
@@ -118,4 +118,25 @@ class ReportEngineTest {
         assertThat(engine.generate(employee -> true)).isEqualTo(expect.toString());
 
     }
+
+    @Test
+    void generateForXML() throws JAXBException {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+        Report engine = new ReportForXML(store);
+        StringBuilder expect = new StringBuilder()
+                .append("{\"name\":\"")
+                .append(worker.getName()).append("\",")
+                .append("\"hired\":{")
+                .append(Constants.DATE_FORMAT.format(worker.getHired().getTime())).append(",")
+                .append("\"fired\":{")
+                .append(worker.getFired()).append(",")
+                .append("\"salary\":\"")
+                .append(worker.getSalary()).append("}");
+        assertThat(engine.generate(employee -> true)).isEqualTo(expect.toString());
+
+    }
+    */
 }
