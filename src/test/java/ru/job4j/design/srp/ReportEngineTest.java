@@ -2,6 +2,7 @@ package ru.job4j.design.srp;
 
 import org.junit.jupiter.api.Test;
 
+import javax.xml.bind.JAXBException;
 import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.*;
@@ -9,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 class ReportEngineTest {
 
     @Test
-    void whenOldGenerated() {
+    void whenOldGenerated() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -28,7 +29,7 @@ class ReportEngineTest {
     }
 
     @Test
-    void generateForAccounting() {
+    void generateForAccounting() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -47,7 +48,7 @@ class ReportEngineTest {
     }
 
     @Test
-    void generateForHR() {
+    void generateForHR() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee workerFirst = new Employee("Ivan", now, now, 100);
@@ -68,7 +69,7 @@ class ReportEngineTest {
     }
 
     @Test
-    void generateForIT() {
+    void generateForIT() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -94,6 +95,26 @@ class ReportEngineTest {
                 .append(Constants.LINE_SEPARATOR)
                 .append("</html>")
                 .append(Constants.LINE_SEPARATOR);
+        assertThat(engine.generate(employee -> true)).isEqualTo(expect.toString());
+
+    }
+
+    @Test
+    void generateForJSON() throws JAXBException {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+        Report engine = new ReportForJSON(store);
+        StringBuilder expect = new StringBuilder()
+                .append("{\"name\":\"")
+                .append(worker.getName()).append("\",")
+                .append("\"hired\":{")
+                .append(Constants.DATE_FORMAT.format(worker.getHired().getTime())).append(",")
+                .append("\"fired\":{")
+                .append(worker.getFired()).append(",")
+                .append("\"salary\":\"")
+                .append(worker.getSalary()).append("}");
         assertThat(engine.generate(employee -> true)).isEqualTo(expect.toString());
 
     }
