@@ -7,21 +7,16 @@ import java.util.function.Predicate;
 
 public class ReportForJSON implements Report {
     private Store store;
+    private Gson gson;
+
 
     public ReportForJSON(Store store) {
         this.store = store;
+        gson = new GsonBuilder().create();
     }
-
-    final Gson gson = new GsonBuilder().create();
 
     @Override
     public String generate(Predicate<Employee> filter) {
-        StringBuilder text = new StringBuilder();
-
-        for (Employee employee : store.findBy(filter)) {
-            text.append(gson.toJson(employee));
-        }
-
-        return text.toString();
+        return gson.toJson(store.findBy(filter));
     }
 }

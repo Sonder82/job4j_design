@@ -5,16 +5,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
-/**
- * Класс описывает модель Сотрудники
- */
-@XmlRootElement(name = "employee")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
 
-    @XmlAttribute
     private String name;
     private Calendar hired;
     private Calendar fired;
@@ -82,5 +77,6 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(name, hired, fired, salary);
     }
+
 
 }
