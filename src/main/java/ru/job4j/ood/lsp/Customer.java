@@ -24,7 +24,7 @@ public class Customer {
 
     public double chargeMoney(double sum) {
 
-        if (getAccount() - sum < 10 && sum <= 0) { // Постусловие
+        if (getAccount() - sum < 10 && sum <= 0) {
             throw new IllegalArgumentException("Недостаточно средств");
         }
         return sum * 0.95;
@@ -39,7 +39,7 @@ public class Customer {
         @Override
         public double chargeMoney(double sum) {
 
-            if (getAccount() - sum < 0 && sum <= 0) { // Постусловие
+            if (getAccount() - sum < 0 && sum <= 0) {
                 throw new IllegalArgumentException("Недостаточно средств");
             }
             return sum * 0.97;
