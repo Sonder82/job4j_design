@@ -1,4 +1,4 @@
-package ru.job4j.ood.storefood;
+package ru.job4j.ood.lsp.storefood;
 
 import java.util.Calendar;
 import java.util.Objects;
