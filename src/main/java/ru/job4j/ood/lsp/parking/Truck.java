@@ -1,12 +1,22 @@
 package ru.job4j.ood.lsp.parking;
 
+/**
+ * Грузовая машина может разместиться на месте,
+ * предназначенном для грузовых машин,
+ * либо на N парковочных мест для легковых машин, стоящих рядом.
+ * Размер грузового а/м > 1.
+ */
 public class Truck implements Vehicle {
 
-    private static final int SIZE_PASSENGER_CAR = 1;
     private int size;
 
+    public Truck(int size) {
+        checkSize(size);
+        this.size = size;
+    }
+
     public boolean checkSize(int size) {
-        if (size <= SIZE_PASSENGER_CAR) {
+        if (size <= Car.SIZE_PASSENGER_CAR) {
             throw new IllegalArgumentException("Size must be more then 1");
         }
         return true;
@@ -14,6 +24,6 @@ public class Truck implements Vehicle {
 
     @Override
     public int sizeForParkPlace() {
-        return size;
+        return this.size;
     }
 }
