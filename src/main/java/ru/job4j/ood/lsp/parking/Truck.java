@@ -1,9 +1,9 @@
 package ru.job4j.ood.lsp.parking;
 
-public class Track implements Vehicle {
+public class Truck implements Vehicle {
 
     private static final int SIZE_PASSENGER_CAR = 1;
-    int size;
+    private int size;
 
     public boolean checkSize(int size) {
         if (size <= SIZE_PASSENGER_CAR) {
