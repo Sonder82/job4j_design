@@ -22,6 +22,10 @@ public class Truck implements Vehicle {
         return true;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     @Override
     public int sizeForParkPlace() {
         return this.size;

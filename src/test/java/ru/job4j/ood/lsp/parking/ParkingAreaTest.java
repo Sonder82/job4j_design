@@ -1,15 +1,14 @@
 package ru.job4j.ood.lsp.parking;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-    @Disabled
+
     class ParkingAreaTest {
 
         @Test
-        void addTwoCarsAndOneTruck() {
+        void whenAddTwoCarsAndOneTruck() {
             ParkingArea parkingArea = new ParkingArea(2, 1);
             Vehicle carOne = new Car();
             Vehicle carTwo = new Car();
@@ -17,38 +16,69 @@ import static org.assertj.core.api.Assertions.*;
             assertThat(parkingArea.add(carOne)).isTrue();
             assertThat(parkingArea.add(carTwo)).isTrue();
             assertThat(parkingArea.add(truckOne)).isTrue();
+            assertThat(parkingArea.getAll()).hasSize(3);
 
         }
 
         @Test
-        void addTwoTrucksUseTwoPlacesForCar() {
+        void whenAddTwoTrucksUseTwoPlacesForCar() {
             ParkingArea parkingArea = new ParkingArea(2, 1);
             Vehicle truckOne = new Truck(2);
             Vehicle truckTwo = new Truck(2);
             assertThat(parkingArea.add(truckOne)).isTrue();
             assertThat(parkingArea.add(truckTwo)).isTrue();
+            assertThat(parkingArea.getAll()).hasSize(2);
+        }
+
+        @Test
+        void whenAddTwoTrucksUseTwoPlacesForCarAndThenAddCar() {
+            ParkingArea parkingArea = new ParkingArea(2, 1);
+            Vehicle truckOne = new Truck(2);
+            Vehicle truckTwo = new Truck(2);
+            Vehicle carOne = new Car();
+            assertThat(parkingArea.add(truckOne)).isTrue();
+            assertThat(parkingArea.add(truckTwo)).isTrue();
+            assertThat(parkingArea.add(carOne)).isFalse();
+            assertThat(parkingArea.getAll()).hasSize(2);
         }
 
         @Test
         void checkSize() {
-            Truck truckOne = new Truck(1);
-            assertThatThrownBy(() -> truckOne.checkSize(1))
+            assertThatThrownBy(() ->  new Truck(1))
                     .isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
-        void addTruckUseOnePlaceForCar() {
+        void whenAddTruckUseOnePlaceForCar() {
             ParkingArea parkingArea = new ParkingArea(1, 1);
             Vehicle truckOne = new Truck(2);
             Vehicle truckTwo = new Truck(2);
             assertThat(parkingArea.add(truckOne)).isTrue();
             assertThat(parkingArea.add(truckTwo)).isFalse();
+            assertThat(parkingArea.getAll()).hasSize(1);
         }
 
         @Test
-        void addCarUsePlaceForTruck() {
-            ParkingArea parkingArea = new ParkingArea(0, 1);
+        void whenAddTruckUsePlaceForCar() {
+            ParkingArea parkingArea = new ParkingArea(1, 1);
+            Vehicle truckOne = new Truck(2);
+            Vehicle truckTwo = new Truck(2);
+            assertThat(parkingArea.add(truckOne)).isTrue();
+            assertThat(parkingArea.add(truckTwo)).isFalse();
+            assertThat(parkingArea.getAll()).hasSize(1);
+        }
+
+        @Test
+        void whenAddAnyVehicleButParkPlacesAreOccupied() {
+            ParkingArea parkingArea = new ParkingArea(1, 1);
             Vehicle carOne = new Car();
-            assertThat(parkingArea.add(carOne)).isFalse();
+            Vehicle truckOne = new Truck(2);
+            Vehicle carTwo = new Car();
+            Vehicle truckTwo = new Truck(2);
+            assertThat(parkingArea.add(carOne)).isTrue();
+            assertThat(parkingArea.add(truckOne)).isTrue();
+            assertThat(parkingArea.add(carTwo)).isFalse();
+            assertThat(parkingArea.add(truckTwo)).isFalse();
+            assertThat(parkingArea.getAll()).hasSize(2);
         }
 }
