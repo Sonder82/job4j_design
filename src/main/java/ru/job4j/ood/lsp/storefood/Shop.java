@@ -1,11 +1,6 @@
 package ru.job4j.ood.lsp.storefood;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Shop extends AbstractStore implements Store {
-
-    List<Food> shopFoodList = new ArrayList<>();
+public class Shop extends AbstractStore {
 
     @Override
     public boolean addFood(Food food) {
@@ -13,14 +8,9 @@ public class Shop extends AbstractStore implements Store {
         if (isNotExpired(food)) {
             result = true;
             discount(food);
-            shopFoodList.add(food);
+            foodList.add(food);
         }
         return result;
-    }
-
-    @Override
-    public List<Food> getFoodList() {
-        return List.copyOf(shopFoodList);
     }
 
     @Override

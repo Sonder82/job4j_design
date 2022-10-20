@@ -2,7 +2,6 @@ package ru.job4j.ood.lsp.storefood;
 
 import java.util.Calendar;
 
-
 public class CountPercent {
 
     /**
