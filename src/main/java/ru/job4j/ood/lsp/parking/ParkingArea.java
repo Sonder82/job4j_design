@@ -6,8 +6,8 @@ public class ParkingArea implements Parking {
 
     private int countParkCar;
     private int countParkTruck;
-    HashSet<Vehicle> cars = new HashSet<>();
-    HashSet<Vehicle> trucks = new HashSet<>();
+    private HashSet<Vehicle> cars = new HashSet<>();
+    private HashSet<Vehicle> trucks = new HashSet<>();
 
     public ParkingArea(int countParkCar, int countParkTruck) {
         this.countParkCar = countParkCar;
@@ -19,11 +19,13 @@ public class ParkingArea implements Parking {
     @Override
     public boolean add(Vehicle vehicle) {
         boolean result;
-        if (countParkCar > 0 && vehicle.sizeForParkPlace() == Car.SIZE_PASSENGER_CAR) {
+        if (countParkCar >= Car.SIZE_PASSENGER_CAR
+                && vehicle.getSize() == Car.SIZE_PASSENGER_CAR) {
             cars.add(vehicle);
             countParkCar--;
             result = true;
-        } else if (countParkTruck > 0) {
+        } else if (countParkTruck >= Car.SIZE_PASSENGER_CAR
+                && vehicle.getSize() > Car.SIZE_PASSENGER_CAR) {
             trucks.add(vehicle);
             countParkTruck--;
             result = true;
@@ -35,9 +37,9 @@ public class ParkingArea implements Parking {
 
     private boolean checkUseCarPlace(Vehicle vehicle) {
         boolean result = false;
-        if (countParkTruck == 0 && countParkCar >= 2) {
+        if (countParkTruck == 0 && countParkCar >= vehicle.getSize()) {
             trucks.add(vehicle);
-            countParkCar = countParkCar - vehicle.sizeForParkPlace();
+            countParkCar = countParkCar - vehicle.getSize();
             result = true;
         }
         return result;

@@ -5,5 +5,5 @@ package ru.job4j.ood.lsp.parking;
  * размера парковочного места.
  */
 public interface Vehicle {
-    int sizeForParkPlace();
+    int getSize();
 }

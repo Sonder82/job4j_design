@@ -15,19 +15,14 @@ public class Truck implements Vehicle {
         this.size = size;
     }
 
-    public boolean checkSize(int size) {
+    public void checkSize(int size) {
         if (size <= Car.SIZE_PASSENGER_CAR) {
             throw new IllegalArgumentException("Size must be more then 1");
         }
-        return true;
-    }
-
-    public int getSize() {
-        return size;
     }
 
     @Override
-    public int sizeForParkPlace() {
+    public int getSize() {
         return this.size;
     }
 }
