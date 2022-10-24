@@ -1,0 +1,19 @@
+24.10.2022
+Класс SimpleMenu.
+
+Метод findItem и iterator делаем на основе итератора DFSIterator.
+Iterator<ItemInfo> iterator = new DFSIterator();
+Не мог понять как "подступиться" к методам. Пока не прочитал этого.
+
+Изначально написал метод select вот так:
+@Override
+    public Optional<MenuItemInfo> select(String itemName) {
+        Optional<ItemInfo> itemInfo = findItem(itemName);
+        MenuItemInfo menuItemInfo = new MenuItemInfo(itemInfo.get().getMenuItem(), itemInfo.get().getNumber());
+        return Optional.of(menuItemInfo);
+    }
+В вкладке Problems появилась подсказка, что могу получить NPE при таком коде.
+Например если в itemName закинуть несуществующий Name.
+Загуглив, эту проблему можно решить через метод map.
+Результат помещается в новый Optional <MenuItemInfo>
+Сделано. Получилось решение в одну строку!!!!
