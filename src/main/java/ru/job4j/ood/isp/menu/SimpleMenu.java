@@ -14,10 +14,21 @@ public class SimpleMenu implements Menu {
 
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
-        boolean result = true;
+        if (findItem(childName).isPresent()) {
+            throw new IllegalArgumentException("You are trying to add a name, that is in the menu");
+        }
 
-        return result;
+        if (Objects.equals(parentName, Menu.ROOT)) {
+            return rootElements.add(new SimpleMenuItem(childName, actionDelegate));
+        }
+
+        Optional<ItemInfo> itemInfo = findItem(parentName);
+        if (itemInfo.isPresent()) {
+            return itemInfo.get().getMenuItem().getChildren().add(new SimpleMenuItem(childName, actionDelegate));
+        }
+        return false;
     }
+
 
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
@@ -37,10 +48,8 @@ public class SimpleMenu implements Menu {
 
             @Override
             public MenuItemInfo next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                return new MenuItemInfo(iterator.next().getMenuItem(), iterator.next().getNumber());
+                ItemInfo item = iterator.next();
+                return new MenuItemInfo(item.getMenuItem(), item.getNumber());
             }
         };
     }
@@ -48,7 +57,7 @@ public class SimpleMenu implements Menu {
     private Optional<ItemInfo> findItem(String name) {
         Optional<ItemInfo> result = Optional.empty();
         Iterator<ItemInfo> iterator = new DFSIterator();
-        while (iterator().hasNext()) {
+        while (iterator.hasNext()) {
             ItemInfo itemInfo = iterator.next();
             if (itemInfo.getMenuItem().getName().equals(name)) {
                 result = Optional.of(itemInfo);
