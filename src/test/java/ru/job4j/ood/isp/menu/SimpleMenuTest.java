@@ -41,7 +41,7 @@ class SimpleMenuTest {
         menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
         menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
         assertThat(menu.select("Сходить в магазин").get())
-                .isEqualTo (new Menu.MenuItemInfo("Сходить в магазин",
+                .isEqualTo(new Menu.MenuItemInfo("Сходить в магазин",
                 List.of("Купить продукты"), STUB_ACTION, "1."));
         assertThat(menu.select("Сходить в кино")).isEqualTo(Optional.empty());
     }
