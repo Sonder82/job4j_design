@@ -9,8 +9,11 @@ public class SimpleMenuPrinter implements MenuPrinter {
        StringBuilder sb = new StringBuilder();
         for (Menu.MenuItemInfo menuItemInfo : menu) {
            int count = menuItemInfo.getNumber().split("\\.").length - 1;
-           sb.append(CHAR.repeat(count)).append(menuItemInfo.getNumber())
-                   .append(menuItemInfo.getName()).append(System.lineSeparator());
+           StringBuilder text = new StringBuilder();
+           text.append(CHAR.repeat(count));
+            System.out.println(text.append(menuItemInfo.getNumber())
+                    .append(menuItemInfo.getName()));
+           sb.append(text).append(System.lineSeparator());
         }
         return sb.toString();
     }
