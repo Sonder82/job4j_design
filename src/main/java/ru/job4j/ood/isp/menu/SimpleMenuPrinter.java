@@ -1,34 +1,16 @@
 package ru.job4j.ood.isp.menu;
 
 public class SimpleMenuPrinter implements MenuPrinter {
-    public static final ActionDelegate STUB_ACTION = System.out::println;
-
+    public static final String CHAR = "---";
 
     @Override
-    public void print(Menu menu) {
-        long count;
+    public String print(Menu menu) {
+       StringBuilder sb = new StringBuilder();
         for (Menu.MenuItemInfo menuItemInfo : menu) {
-            count = menuItemInfo.getNumber().chars().filter(ch -> ch == '.').count();
-            if (count == 1) {
-                System.out.println(menuItemInfo.getNumber().concat(menuItemInfo.getName()));
-            }
-            if (count == 2) {
-                System.out.println("---" + menuItemInfo.getNumber().concat(menuItemInfo.getName()));
-            }
-            if (count == 3) {
-                System.out.println("------" + menuItemInfo.getNumber().concat(menuItemInfo.getName()));
-            }
+           int count = menuItemInfo.getNumber().split("\\.").length - 1;
+           sb.append(CHAR.repeat(count)).append(menuItemInfo.getNumber())
+                   .append(menuItemInfo.getName()).append(System.lineSeparator());
         }
-    }
-
-    public static void main(String[] args) {
-        Menu menu = new SimpleMenu();
-        menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
-        menu.add(Menu.ROOT, "Покормить собаку", STUB_ACTION);
-        menu.add("Сходить в магазин", "Купить продукты", STUB_ACTION);
-        menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
-        menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
-        SimpleMenuPrinter simpleMenuPrinter = new SimpleMenuPrinter();
-        simpleMenuPrinter.print(menu);
+        return sb.toString();
     }
 }

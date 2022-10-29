@@ -15,7 +15,7 @@ public class SimpleMenu implements Menu {
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
         if (findItem(childName).isPresent()) {
-            throw new IllegalArgumentException("You are trying to add a name, that is in the menu");
+            return false;
         }
 
         if (Objects.equals(parentName, Menu.ROOT)) {
