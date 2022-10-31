@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-@Disabled
+
 class SimpleMenuTest {
 
     public static final ActionDelegate STUB_ACTION = System.out::println;
+    public static final String SEPARATOR = System.lineSeparator();
 
     @Test
     public void whenAddThenReturnSame() {
@@ -55,12 +56,12 @@ class SimpleMenuTest {
         menu.add("Сходить в магазин", "Купить продукты", STUB_ACTION);
         menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
         menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
-        assertThat("""
-                1.Сходить в магазин\r
-                ---1.1.Купить продукты\r
-                ------1.1.1.Купить хлеб\r
-                ------1.1.2.Купить молоко\r
-                2.Покормить собаку\r
-                """).isEqualTo(new SimpleMenuPrinter().print(menu));
+        StringBuilder expected = new StringBuilder();
+        expected.append("1.Сходить в магазин").append(SEPARATOR)
+                        .append("---1.1.Купить продукты").append(SEPARATOR)
+                        .append("------1.1.1.Купить хлеб").append(SEPARATOR)
+                        .append("------1.1.2.Купить молоко").append(SEPARATOR)
+                        .append("2.Покормить собаку").append(SEPARATOR);
+        assertThat(expected.toString()).isEqualTo(new SimpleMenuPrinter().print(menu));
     }
 }
