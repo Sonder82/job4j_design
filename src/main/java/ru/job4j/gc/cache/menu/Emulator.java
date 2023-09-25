@@ -2,7 +2,6 @@ package ru.job4j.gc.cache.menu;
 
 import ru.job4j.gc.cache.DirFileCache;
 
-import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Emulator {
